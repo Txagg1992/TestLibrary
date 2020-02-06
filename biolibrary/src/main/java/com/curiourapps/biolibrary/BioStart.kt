@@ -1,6 +1,7 @@
 package com.curiourapps.biolibrary
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.biometric.BiometricManager
@@ -14,10 +15,13 @@ class BioStart {
     private val TAG: String = "BioStart"
     private val TAGBIO: String = "BioOpened"
 
-    public lateinit var context: Context
+    lateinit var context: Context
 
-//    openBio()
-//    biometricPrompt = bioMet()
+//    fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        openBio()
+//        biometricPrompt = bioMet()
+//    }
 
     private fun bioMet(): BiometricPrompt {
 
