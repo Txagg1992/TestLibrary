@@ -3,13 +3,14 @@ package com.curiourapps.biolibrary
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 
-class BioStart {
+public class BioStart {
 
     private lateinit var biometricPrompt: BiometricPrompt
     private val TAG: String = "BioStart"
@@ -23,7 +24,7 @@ class BioStart {
 //        biometricPrompt = bioMet()
 //    }
 
-    private fun bioMet(): BiometricPrompt {
+    fun bioMet(): BiometricPrompt {
 
         val fragmentActivity = FragmentActivity()
         val executor = ContextCompat.getMainExecutor(context)
@@ -63,7 +64,7 @@ class BioStart {
             .build()
     }
 
-    private fun openBio() {
+    private fun openBio(view: View) {
         Log.d(TAGBIO, "<++ Biometric opened ++>")
         val promptInfo = createPromptInfo()
         if (BiometricManager.BIOMETRIC_SUCCESS == BiometricManager
