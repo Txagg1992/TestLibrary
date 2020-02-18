@@ -51,7 +51,7 @@ class BioStart{
                     Log.d(TAG, "<<< Login Success >>>")
                 }
             }
-            biometricPrompt = BiometricPrompt(fragmentActivity, executor, callback)
+            biometricPrompt = BiometricPrompt(context, executor, callback)
             openBio(context)
             //return BiometricPrompt(fragmentActivity, executor, callback)
         }
