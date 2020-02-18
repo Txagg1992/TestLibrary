@@ -2,6 +2,7 @@ package com.curiourapps.testlibrary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.curiourapps.biolibrary.BioStart
 
 class MainActivity : AppCompatActivity() {
 
