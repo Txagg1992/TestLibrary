@@ -11,28 +11,15 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 
-class BioStart {
+class BioStart{
 
     companion object {
-        private var biometricPrompt: BiometricPrompt
-
         val TAG: String = "BioStart"
         val TAGBIO: String = "BioOpened"
-        private lateinit var context: Context
-        fun setContext(mContext: Context): Context {
-            context = mContext
-            return context
-        }
+        var biometricPrompt: BiometricPrompt? = null
 
-        init {
-            context = setContext(context)
-            biometricPrompt = bioMet()
-        }
-
-
-        fun bioMet(): BiometricPrompt {
-
-            openBio()
+        fun bioMet(context: FragmentActivity) {
+            //openBio(context)
 
             val fragmentActivity = FragmentActivity()
             val executor = ContextCompat.getMainExecutor(context)
@@ -64,8 +51,9 @@ class BioStart {
                     Log.d(TAG, "<<< Login Success >>>")
                 }
             }
-            return BiometricPrompt(fragmentActivity, executor, callback)
-            //return BiometricPrompt(FragmentActivity: context, executor, callback)
+            biometricPrompt = BiometricPrompt(fragmentActivity, executor, callback)
+            openBio(context)
+            //return BiometricPrompt(fragmentActivity, executor, callback)
         }
 
         private fun createPromptInfo(): BiometricPrompt.PromptInfo {
@@ -76,7 +64,7 @@ class BioStart {
                 .build()
         }
 
-        private fun openBio() {
+        private fun openBio(context: Context) {
             Log.d(TAGBIO, "<++ Biometric opened ++>")
             val promptInfo = createPromptInfo()
             if (BiometricManager.BIOMETRIC_SUCCESS == BiometricManager
@@ -84,7 +72,7 @@ class BioStart {
                     .canAuthenticate()
             ) {
                 Log.d(TAGBIO, "No error detected. Login in progress.")
-                biometricPrompt.authenticate(promptInfo)
+                biometricPrompt?.authenticate(promptInfo)
             } else {
 
             }
