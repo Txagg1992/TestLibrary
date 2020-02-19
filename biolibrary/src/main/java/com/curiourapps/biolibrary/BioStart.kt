@@ -1,10 +1,7 @@
 package com.curiourapps.biolibrary
 
-import android.app.Application
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -14,30 +11,23 @@ import androidx.fragment.app.FragmentActivity
 class BioStart{
 
     companion object {
-        val TAG: String = "BioStart"
-        val TAGBIO: String = "BioOpened"
-        var biometricPrompt: BiometricPrompt? = null
+        private val cContext = AppliContext.getContext()
+        private val TAG: String = "BioStart"
+        private val TAGBIO: String = "BioOpened"
+        private var biometricPrompt: BiometricPrompt? = null
 
         fun bioMet(context: FragmentActivity) {
-            //openBio(context)
-
-            val fragmentActivity = FragmentActivity()
             val executor = ContextCompat.getMainExecutor(context)
             val callback = object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
                     Log.d(TAG, "$errorCode :: $errString")
                     if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON)
-                        Toast.makeText(
-                            context,
-                            "User Cancelled : $errString", Toast.LENGTH_LONG
-                        ).show()
-                    //finish()
+                        Toast.makeText(context,
+                            "User Cancelled : $errString", Toast.LENGTH_LONG).show()
                     if (errorCode == BiometricPrompt.ERROR_USER_CANCELED) {
-                        Toast.makeText(
-                            context,
-                            "User Cancelled : $errString", Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(context,
+                            "User Cancelled : $errString", Toast.LENGTH_LONG).show()
                     }
                 }
 
@@ -58,8 +48,8 @@ class BioStart{
 
         private fun createPromptInfo(): BiometricPrompt.PromptInfo {
             return BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Log into myFios")
-                .setDescription("Touch Fingerprint sensor")
+                .setTitle("Log In")
+                .setDescription("Secure Biometric Login")
                 .setNegativeButtonText("Use Password")
                 .build()
         }
@@ -78,13 +68,10 @@ class BioStart{
             }
             if (BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE == BiometricManager
                     .from(context)
-                    .canAuthenticate()
-            ) {
+                    .canAuthenticate()) {
                 Log.d(TAGBIO, "This device does not have a biometric scanner.")
-                Toast.makeText(
-                    context,
-                    "This device does not have a biometric scanner.", Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(context,
+                    "This device does not have a biometric scanner.", Toast.LENGTH_LONG).show()
             }
             if (BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED == BiometricManager
                     .from(context)

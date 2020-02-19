@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BioLibrary</string>
+    <string name="login_description">Secure Fingerprint Login</string>
+    <string name="login_title">Log into myFios</string>
+    <string name="negative_button_text">Use Password</string>
+    <string name="description">Secure Biometric Login</string>
+
 </resources>
