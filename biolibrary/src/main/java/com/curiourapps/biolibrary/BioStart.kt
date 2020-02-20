@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentActivity
 class BioStart{
 
     companion object {
-        private val cContext = AppliContext.getContext()
+        //private val cContext = AppliContext.getContext()
         private val TAG: String = "BioStart"
         private val TAGBIO: String = "BioOpened"
         private var biometricPrompt: BiometricPrompt? = null
@@ -46,7 +46,15 @@ class BioStart{
             //return BiometricPrompt(fragmentActivity, executor, callback)
         }
 
-        private fun createPromptInfo(): BiometricPrompt.PromptInfo {
+        fun customPromptInfo(): BioPromptInfo {
+            return BioPromptInfo.Builder()
+                .setTitle("")
+                .setDescription("")
+                .setNegativeButtonText("")
+                .build()
+
+        }
+        fun createPromptInfo(): BiometricPrompt.PromptInfo {
             return BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Log In")
                 .setDescription("Secure Biometric Login")
@@ -56,7 +64,7 @@ class BioStart{
 
         private fun openBio(context: Context) {
             Log.d(TAGBIO, "<++ Biometric opened ++>")
-            val promptInfo = createPromptInfo()
+            val promptInfo = customPromptInfo()
             if (BiometricManager.BIOMETRIC_SUCCESS == BiometricManager
                     .from(context)
                     .canAuthenticate()
